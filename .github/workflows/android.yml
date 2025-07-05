@@ -20,7 +20,7 @@ jobs:
         run: ./gradlew test assembleRelease
 
       - name: Uploading mapping files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mappings
           path: ${{ github.workspace }}/**/build/outputs/mapping/*
