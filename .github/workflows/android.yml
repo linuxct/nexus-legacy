@@ -27,7 +27,7 @@ jobs:
           if-no-files-found: error
 
       - name: Uploading APKs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apks
           path: ${{ github.workspace }}/**/build/outputs/apk/**/*.apk
