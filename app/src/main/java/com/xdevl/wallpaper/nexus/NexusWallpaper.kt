@@ -83,10 +83,10 @@ class NexusWallpaper : WallpaperService() {
             surfaceHolder.setSizeFromLayout()
             holder = surfaceHolder
             gestureDetector = GestureDetectorCompat(this@NexusWallpaper, object : GestureDetector.OnGestureListener {
-                override fun onDown(p0: MotionEvent?): Boolean = false
-                override fun onShowPress(p0: MotionEvent?) = Unit
-                override fun onSingleTapUp(event: MotionEvent?): Boolean {
-                    return event?.let {
+                override fun onDown(p0: MotionEvent): Boolean = false
+                override fun onShowPress(p0: MotionEvent) = Unit
+                override fun onSingleTapUp(event: MotionEvent): Boolean {
+                    return event.let {
                         renderingScope.launch {
                             model.createExtraPulsesAt(
                                 xOffsetRatio * model.width * (1 - 1f / WALLPAPER_HSCALE) +  it.x - model.width / 2f,
@@ -94,11 +94,11 @@ class NexusWallpaper : WallpaperService() {
                             )
                         }
                         true
-                    } ?: false
+                    }
                 }
-                override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
-                override fun onLongPress(p0: MotionEvent?) = Unit
-                override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
+                override fun onScroll(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean = false
+                override fun onLongPress(p0: MotionEvent) = Unit
+                override fun onFling(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean = false
             })
         }
 
@@ -152,7 +152,9 @@ class NexusWallpaper : WallpaperService() {
 
         override fun onTouchEvent(event: MotionEvent?) {
             super.onTouchEvent(event)
-            gestureDetector.onTouchEvent(event)
+            if (event != null) {
+                gestureDetector.onTouchEvent(event)
+            }
         }
 
         private fun renderFrame(surfaceHolder: SurfaceHolder) {
