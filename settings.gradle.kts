@@ -1,10 +1,21 @@
-include("app")
-
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            library("agp", "com.android.tools.build:gradle:8.0.2")
-            library("kgp", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
-        }
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven("https://jitpack.io")
+        mavenLocal()
     }
 }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+        mavenLocal()
+    }
+}
+
+rootProject.name = "Nexus-Legacy"
+include("app")
